@@ -25,8 +25,8 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
-  var userName = req.body.ini_temp;
-  res.render('res', {userName: userName});
+  var RES = req.body.ini_temp;
+  res.render('res', {RES: RES});
 });
 
 // app.post('/res', function(req, res){
