@@ -3,6 +3,8 @@ var path = require('path');
 
 var app = express();
 
+var temperatura = require("./temp.js");
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 // set the view engine to ejs
@@ -25,15 +27,12 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
-  var RES = req.body.ini_temp;
-  res.render('res', {RES: RES});
-});
+  var temp_inicial = new temperatura();
+  temp_inicial.inicializador(req.body.ini_temp);
 
-// app.post('/res', function(req, res){
-//   //res.send('Prueba: ' + req.body.ini_temp);
-//   resultado.innerHTML = req.body.ini_temp;
-//   res.render('index');
-// });
+  var result = temp_inicial.conversor();
+  res.render('res', {RES: result});
+});
 
 app.listen(app.get('port'), function() {
   console.log("La NodeAPP está corriendo en: http://localhost:" + app.get('port'));

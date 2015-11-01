@@ -14,6 +14,8 @@ function Temperatura() {
 // Indicamos que Temperatura hereda de Medida.
 Temperatura.prototype = new Medida();
 
+module.exports = Temperatura;
+
 
 // Inicializador
 Temperatura.prototype.inicializador = function(temp){
@@ -53,11 +55,4 @@ Temperatura.prototype.conversor = function(){
     var res = (this.get_valor()-32)*(5/9);
     return ("El resultado es: " + res + " " + "C");
   }
-}
-
-
-function convertir(){
-  var temperatura = new Temperatura();
-  temperatura.inicializador(inicial.value);
-  resultado.innerHTML = temperatura.conversor();
 }
