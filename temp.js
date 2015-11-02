@@ -14,16 +14,16 @@ function Temperatura() {
 // Indicamos que Temperatura hereda de Medida.
 Temperatura.prototype = new Medida();
 
-module.exports = Temperatura;
-
 
 // Inicializador
 Temperatura.prototype.inicializador = function(temp){
   var exp_regular = /^\s*([-+]?\d+(?:\.\d+)?(?:e[+-]?\d+)?)\s*([fFcC])/;
   var valor = temp.match(exp_regular);
 
-  this.set_valor(parseFloat(valor[1]));
-  this.set_tipo(valor[2]);
+  if(valor !== null){
+    this.set_valor(parseFloat(valor[1]));
+    this.set_tipo(valor[2]);
+  }
 }
 
 
@@ -46,6 +46,10 @@ Medida.prototype.set_tipo = function(tipo){
 
 Temperatura.prototype.conversor = function(){
 
+  if(this.get_valor() === undefined || this.get_tipo() ===undefined){
+    return ("Error, el valor no es válido.");
+  }
+
   if(this.get_tipo() === 'C' || this.get_tipo() ==='c'){
     var res = (this.get_valor()*(9/5))+32;
     return ("El resultado es: " + res + " " + "F");
@@ -56,3 +60,6 @@ Temperatura.prototype.conversor = function(){
     return ("El resultado es: " + res + " " + "C");
   }
 }
+
+
+module.exports = Temperatura;
